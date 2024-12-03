@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Answer;  // Assurez-vous que vous avez le modèle Answer
 
 class QuestionController extends Controller
 {
@@ -55,28 +56,44 @@ class QuestionController extends Controller
         return redirect('/questions')->with('success', 'Question ajoutée avec succès !');
     }
 
-    // Met à jour une question existante (update)
-    public function update(Request $request, $id)
+    // Affiche le formulaire d'édition pour une question existante
+    public function edit($id)
     {
         // Trouver la question par ID
         $question = Question::find($id);
 
         // Vérifier si la question existe
         if (!$question) {
-            return response()->json(['message' => 'Question non trouvée'], 404);
+            // Si la question n'est pas trouvée, rediriger avec un message d'erreur
+            return redirect()->route('questions.index')->with('error', 'Question non trouvée.');
         }
 
-        // Validation des données envoyées dans la requête (les champs sont optionnels)
+        // Retourner la vue d'édition avec la question
+        return view('questions.edit', compact('question'));
+    }
+
+    // Met à jour une question existante (update)
+    public function update(Request $request, $id)
+    {
+        // Validation des données envoyées dans la requête
         $validated = $request->validate([
-            'title' => 'sometimes|string',
+            'title' => 'required|string',
             'image_url' => 'nullable|string',
         ]);
+
+        // Trouver la question par ID
+        $question = Question::find($id);
+
+        // Vérifier si la question existe
+        if (!$question) {
+            return redirect('/questions')->with('error', 'Question non trouvée.');
+        }
 
         // Mettre à jour la question avec les données validées
         $question->update($validated);
 
-        // Retourner la question mise à jour en réponse JSON
-        return response()->json($question, 200);
+        // Rediriger avec un message de succès
+        return redirect('/questions')->with('success', 'Question mise à jour avec succès !');
     }
 
     // Supprime une question (destroy)
@@ -87,20 +104,44 @@ class QuestionController extends Controller
 
         // Vérifier si la question existe
         if (!$question) {
-            return response()->json(['message' => 'Question non trouvée'], 404);
+            return redirect('/questions')->with('error', 'Question non trouvée.');
         }
 
         // Supprimer la question
         $question->delete();
 
-        // Retourner une réponse confirmant la suppression
-        return response()->json(['message' => 'Question supprimée avec succès'], 200);
+        // Rediriger avec un message de succès
+        return redirect('/questions')->with('success', 'Question supprimée avec succès !');
     }
 
-    // (Optionnel) Si vous souhaitez toujours retourner les questions en JSON
+    // Retourne toutes les questions en JSON (API)
     public function indexApi()
     {
         // Récupérer les questions avec leurs réponses
         return response()->json(Question::with('answers')->get(), 200);
+    }
+
+    // Méthode pour ajouter une réponse à une question
+    public function storeAnswer(Request $request, $questionId)
+    {
+        // Validation des données envoyées dans la requête
+        $request->validate([
+            'content' => 'required|string|max:255',
+            'is_correct' => 'nullable|boolean',
+        ]);
+
+        // Trouver la question associée
+        $question = Question::findOrFail($questionId);
+
+        // Créer une nouvelle réponse
+        $answer = new Answer();
+        $answer->content = $request->input('content');
+        $answer->is_correct = $request->has('is_correct');
+        $answer->question_id = $question->id;
+        $answer->save();
+
+        // Rediriger vers la page de la question avec un message de succès
+        return redirect()->route('questions.edit', $question->id)
+            ->with('success', 'Réponse ajoutée avec succès');
     }
 }
