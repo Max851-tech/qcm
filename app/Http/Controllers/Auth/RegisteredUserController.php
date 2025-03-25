@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Routing\Middleware\ValidateSignature;
+
+#[Middleware(ValidateSignature::class)]
+class SomeController5 { }
 
 class RegisteredUserController extends Controller
 {

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\ValidateSignature;
+
+#[Middleware(ValidateSignature::class)]
+class SomeController3 { }
+
 
 class UserController extends Controller
 {

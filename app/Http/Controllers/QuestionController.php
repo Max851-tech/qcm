@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;  // Assurez-vous que vous avez le modèle Answer
+use Illuminate\Routing\Middleware\ValidateSignature;
+
+#[Middleware(ValidateSignature::class)]
+class SomeController2 { }
 
 class QuestionController extends Controller
 {

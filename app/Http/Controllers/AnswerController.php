@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\ValidateSignature;
+
+#[Middleware(ValidateSignature::class)]
+class SomeController { }
 
 class AnswerController extends Controller
 {

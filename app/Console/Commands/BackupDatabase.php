@@ -3,32 +3,24 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
+#[AsCommand(name: 'backup:database')]
 class BackupDatabase extends Command
 {
-    protected $signature = 'backup:database';
-    protected $description = 'Sauvegarde la base de données dans le dossier database/backups/';
+    protected $description = 'Effectue une sauvegarde de la base de données';
 
     public function handle()
     {
-        $filename = 'backup_' . Carbon::now()->format('Y-m-d_H-i-s') . '.sql';
-        $path = database_path('backups/' . $filename);
+        $filename = storage_path('backups/backup_' . date('Y-m-d_H-i-s') . '.sql');
 
-        $db_host = env('DB_HOST', '127.0.0.1');
-        $db_name = env('DB_DATABASE', 'forge');
-        $db_user = env('DB_USERNAME', 'root');
-        $db_pass = env('DB_PASSWORD', '');
+        $command = "mysqldump -u root -pYOUR_PASSWORD qcm_db > $filename";
 
-        $command = "mysqldump --host={$db_host} --user={$db_user} --password={$db_pass} {$db_name} > {$path}";
+        exec($command, $output, $returnVar);
 
-        $result = system($command);
-
-        if ($result === false) {
-            $this->error('Échec de la sauvegarde.');
+        if ($returnVar === 0) {
+            $this->info("Sauvegarde réussie : $filename");
         } else {
-            $this->info("Sauvegarde réussie : {$path}");
+            $this->error("Erreur lors de la sauvegarde.");
         }
     }
 }
