@@ -4,11 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-#[AsCommand(name: 'backup:database')]
+#[AsCommand(name: 'backup:database', description: 'Effectue une sauvegarde de la base de données')]
 class BackupDatabase extends Command
 {
-    protected $description = 'Effectue une sauvegarde de la base de données';
-
     public function handle()
     {
         $filename = storage_path('backups/backup_' . date('Y-m-d_H-i-s') . '.sql');
