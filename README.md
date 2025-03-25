@@ -1,66 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Documentation d’installation de QCM-App
+1. Prérequis
+   Avant de commencer l’installation, assurez-vous d’avoir les logiciels suivants installés sur votre machine :
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1.1. Logiciels nécessaires
+PHP ≥ 8.1 (Testé avec PHP 8.1.12)
 
-## About Laravel
+Composer ≥ 2.0 (Testé avec Composer 2.5.0)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+MySQL ≥ 8.0 (Testé avec MySQL 8.0.31)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Node.js ≥ 16 (Testé avec Node.js 16.15.0 et npm 8.5.0)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel ≥ 10 (Le projet est basé sur Laravel 10)
 
-## Learning Laravel
+Git (Optionnel mais recommandé)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Serveur local (Laragon, XAMPP ou WAMP) (Testé avec Laragon 5.0.0)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Installation des dépendances
+   2.1. Installer PHP et Composer
+   Si PHP et Composer ne sont pas installés, suivez ces étapes :
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Installer PHP
 
-## Laravel Sponsors
+Télécharger PHP depuis le site officiel : https://windows.php.net/download
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ajouter PHP au PATH de Windows si nécessaire.
 
-### Premium Partners
+Installer Composer
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Télécharger et installer Composer depuis : https://getcomposer.org/download/
 
-## Contributing
+Vérifiez l’installation avec :
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+bash
+Copier
+Modifier
+composer -V
+2.2. Installer MySQL
+Télécharger et installer MySQL : https://dev.mysql.com/downloads/mysql/
 
-## Code of Conduct
+Créez une base de données qcm_app :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+sql
+Copier
+Modifier
+CREATE DATABASE qcm_app;
+2.3. Installer Node.js et NPM
+Télécharger et installer Node.js depuis : https://nodejs.org/
 
-## Security Vulnerabilities
+Vérifiez l’installation avec :
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+bash
+Copier
+Modifier
+node -v
+npm -v
+2.4. Installer Laragon (ou XAMPP)
+Télécharger et installer Laragon : https://laragon.org/download
 
-## License
+Démarrer Laragon et vérifier que MySQL et Apache sont actifs.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Cloner et configurer l’application
+   3.1. Récupérer le projet
+   Si Git est installé, utilisez :
+
+bash
+Copier
+Modifier
+git clone https://github.com/utilisateur/qcm-app.git
+cd qcm-app
+Sinon, téléchargez l’archive ZIP et extrayez-la dans C:\laragon\www\qcm-app.
+
+3.2. Installer les dépendances PHP
+Dans le terminal, exécutez :
+
+bash
+Copier
+Modifier
+composer install
+3.3. Installer les dépendances JavaScript
+bash
+Copier
+Modifier
+npm install
+4. Configuration de l’application
+   4.1. Configuration des variables d’environnement
+   Copiez le fichier .env.example en .env :
+
+bash
+Copier
+Modifier
+cp .env.example .env
+Modifiez les paramètres de connexion à la base de données :
+
+makefile
+Copier
+Modifier
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=qcm_app
+DB_USERNAME=root
+DB_PASSWORD=
+Ajoutez aussi les configurations d’email (si nécessaire) :
+
+ini
+Copier
+Modifier
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=hello@example.com
+MAIL_FROM_NAME="QCM-App"
+Générez la clé d’application :
+
+bash
+Copier
+Modifier
+php artisan key:generate
+5. Préparation de la base de données
+   5.1. Exécuter les migrations
+   bash
+   Copier
+   Modifier
+   php artisan migrate --seed
+   ⚠️ Si la base est déjà utilisée, faites :
+
+bash
+Copier
+Modifier
+php artisan migrate:refresh --seed
+6. Lancer l’application
+   6.1. Démarrer le serveur local
+   bash
+   Copier
+   Modifier
+   php artisan serve
+   L’application sera accessible via : http://127.0.0.1:8000
+
+6.2. Compiler les assets
+Si l’application utilise Vue.js ou React :
+
+bash
+Copier
+Modifier
+npm run dev
+7. Configuration des tâches de fond (Queue)
+   Laravel utilise une file d’attente pour certaines tâches en arrière-plan.
+   Lancez la queue avec :
+
+bash
+Copier
+Modifier
+php artisan queue:work
+Si aucun message ne s'affiche, assurez-vous que la configuration QUEUE_CONNECTION=database est bien définie.
+
+8. Problèmes courants et solutions
+   Problème	Solution
+   Erreur SQLSTATE[HY000] [2002] Connection refused	Vérifiez que MySQL est bien démarré.
+   Erreur The stream or file "/storage/logs/laravel.log" could not be opened	Exécutez chmod -R 777 storage bootstrap/cache sous Linux.
+   L’email de réinitialisation ne fonctionne pas	Vérifiez la configuration SMTP dans .env.
+9. Déploiement en production
+   Si vous souhaitez mettre l’application en ligne :
+
+Utiliser un hébergement compatible Laravel (OVH, DigitalOcean, etc.)
+
+Configurer un serveur Apache ou Nginx
+
+Exécuter les migrations et générer les assets en mode production :
+
+bash
+Copier
+Modifier
+php artisan migrate --force
+npm run build
+Configurer un scheduler pour les tâches cron :
+
+bash
+Copier
+Modifier
+* * * * * php /var/www/qcm-app/artisan schedule:run >> /dev/null 2>&1
+          🎉 Félicitations ! L’application est maintenant installée et fonctionnelle.
