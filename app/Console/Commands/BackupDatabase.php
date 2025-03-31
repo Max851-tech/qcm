@@ -36,7 +36,11 @@ class BackupDatabase extends Command
         $backupFile = "backups/{$databaseName}_{$date}.sql";
 
         //dd(storage_path($backupFile)) ;
+<<<<<<< HEAD
 /*        $command = "C:\\laragon\\bin\\mysql\_mysql-8.0.30-winx64\\bin\\mysqldump --user={$username} --password={$password} --host={$host} --port={$port} {$databaseName} > " . storage_path($backupFile);*/
+=======
+        /*        $command = "C:\\laragon\\bin\\mysql\_mysql-8.0.30-winx64\\bin\\mysqldump --user={$username} --password={$password} --host={$host} --port={$port} {$databaseName} > " . storage_path($backupFile);*/
+>>>>>>> d3d615feaf59abfd0ae02cc6f5bbc47c00323b82
 
         $command = "C:\\laragon\\bin\\mysql\_mysql-8.0.30-winx64\\bin\\mysqldump --user={$username} --password={$password} --host={$host} --port={$port} {$databaseName} > C:\\laragon\\www\\qcm_app_test_5\\qcm-app\\storage\\backups\\backup_". date('Y-m-d_H-i-s') . ".sql";
 
